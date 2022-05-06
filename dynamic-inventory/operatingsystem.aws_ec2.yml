@@ -1,0 +1,16 @@
+# operatingsystem.aws_ec2.yml
+# groupn inv based in OperatingSystem tag
+plugin: aws_ec2
+regions:
+  - eu-west-1
+keyed_groups:
+  # add hosts to tag_Name_value groups for each aws_ec2 host's tags.Name variable
+  - key: tags.OperatingSystem
+    prefix: tag_OperatingSystem_
+    separator: ""
+groups:
+  # add hosts to the group development if any of the dictionary's keys or values is the word 'devel'
+  # Project: "'Project' in (tags|list)"
+compose:
+  # set the ansible_host variable to connect with the private IP address without changing the hostname
+  ansible_host: private_ip_address
